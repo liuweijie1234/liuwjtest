@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                <img src="/static/image/{{ user.pic }}" class="img-responsive img-thumbnail">
+                <img src="{{ STATIC_URL }}/image/{{ user.pic }}" class="img-responsive img-thumbnail">
             </div>
             <div class="col-md-10">
                 <h1 style="font-size:70px">{{ user.name }}</h1>
@@ -37,7 +37,7 @@
                 <p style="font-size:50px">Album</p>
             </div>
             <div class="col-md-8">
-                <img src="/static/image/messi.jpg" style="width:188px">
+                <img src="{{ STATIC_URL }}/image/messi.jpg" style="width:188px">
             </div>
         </div>        
         <hr>
