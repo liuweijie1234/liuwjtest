@@ -29,7 +29,7 @@ def get_env_or_raise(key):
 # 应用 ID
 APP_CODE = 'liuwjtest'
 # 应用用于调用云 API 的 Secret
-SECRET_KEY = '0e6528c1-14d9-43d0-ba2c-de225377cebd'
+SECRET_KEY = '2bbbc953-772b-4af7-b75a-b2e21b39c02d'
 
 # SaaS运行版本，如非必要请勿修改
 RUN_VER = 'open'
