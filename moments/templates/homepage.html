@@ -54,10 +54,10 @@
                     "username": $("#register_username").val(),
                     "password": $("#register_email").val(),
                     "email": $("#register_password").val(),
-                    "csrfmiddlewaretoken": $("input[csrfmiddlewaretoken]").val()
+                    "csrfmiddlewaretoken": "{{ csrf_token }}"
                 },
                 success: function (response) {
-                    alert(response["message"])_
+                    alert(response["message"])
                     location.reload()
                 }
             })

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../job-class/.idea/job-class.iml" filepath="$PROJECT_DIR$/../job-class/.idea/job-class.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/liuwjtest.iml" filepath="$PROJECT_DIR$/.idea/liuwjtest.iml" />
     </modules>
   </component>

@@ -25,3 +25,13 @@ class Status(models.Model):
 
     class Meta:
         ordering = ["-id"]
+
+class Reply(models.Model):
+    status = models.ForeignKey(Status, models.CASCADE)
+    author = models.CharField(max_length=50)
+    type = models.CharField(max_length=10, choices=[("0", "like"),("1", "comment")])
+    at_person = models.CharField(max_length=50, null=True, blank=True)
+    text = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return "{} on {}".format(self.author, self.status)

@@ -7,11 +7,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                <img src="{{ STATIC_URL }}image/{% if user.pic %}{{ user.pic }}{% else %}1.jpg{% endif %}" id="icon" class="info">
+                <img src="{{ STATIC_URL }}image/{% if user.pic %}{{ user.pic }}{% else %}1.jpg{% endif %}" id="icon" class="info img-responsive">
             </div>
             <div class="col-md-10">
                 <h1 style="font-size:70px" id="name">{{ user.user }}</h1>
-                <p style="font-size:50px" id="email" class="info">{{ user.email }}</p>
+                <p style="font-size:50px" id="email" class="info">Eamil:{{ user.email }}</p>
             </div>
         </div>
         <div class="row" style="margin-top:62px">
@@ -42,5 +42,35 @@
         </div>        
         <hr>
     </div>
-
+    <script>
+        function update(){
+            $.ajax({
+                url: '/user/update',
+                type: 'post',
+                data:{
+                    'pic': $('#icon').val(),
+                    'email': $('#email').val(),
+                    'region': $('#region').val(),
+                    'motto': $('#motto').val(),
+                    'csrfmiddlewaretoken': "{{ csrf_token }}"
+                },
+                success: function (res) {
+                    if (res['result']){
+                        location.reload()
+                    }else{
+                        alert(res['message'])
+                    }
+                }
+            })
+        }
+        $(".info").click(function () {
+            $("#icon").replaceWith("<input id='icon' style='font-size:50px;color:gray;width:150px' value='" + "{{ user.pic }}" + "' >")
+            $("#email").replaceWith("<input id='email' style='font-size:50px;color:gray' placeholder='Email:' value= '" + $.trim($("#email").html().split(":")[1]) + "'>")
+            $("#region").replaceWith("<input id='region' style='font-size:50px;color:gray' value= '" + $("#region").html() + "'>")
+            $("#motto").replaceWith("<input id='motto' style='font-size:50px;color:gray' value= '" + $("#motto").html() + "'>")
+            $('#name').click(function () {
+                update()
+            })
+        })
+    </script>
 {% endblock %}

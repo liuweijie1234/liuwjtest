@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from moments.models import WeChatUser, Status
+from moments.models import WeChatUser, Status, Reply
 from django.conf import settings
+from blueapps.account.models import User
 from django.contrib.auth.decorators import login_required
 # 开发框架中通过中间件默认是需要登录态的，如有不需要登录的，可添加装饰器login_exempt
 # 装饰器引入 from blueapps.account.decorators import login_exempt
@@ -18,7 +19,7 @@ def show_user(request):
 @login_required
 def show_status(request):
     statuses = Status.objects.all()
-    return render(request, 'status.html', {"statuses":statuses})
+    return render(request, 'status.html', {"statuses": statuses})
 
 @login_required
 def show_post(request):
@@ -44,6 +45,10 @@ def show_post(request):
 def register(request):
     try:
         username, password, email = [request.POST.get(key) for key in ("username", "password", "email")]
+        user = WeChatUser(user=username, email=email)
+        user.set_password(password)
+        user.save()
+
         WeChatUser.objects.create(user=request.user, email=email)
     except Exception as err:
         result = False
@@ -53,3 +58,27 @@ def register(request):
         message = "Register success"
     return JsonResponse({'result': result, 'message': message})
 
+def update_user(request):
+    try:
+        kwargs = {key: request.POST.get(key) for key in ('pic', 'region', 'motto', 'email') if request.POST.get(key)}
+        WeChatUser.objects.filter(user=request.user).update(**kwargs)
+
+        result = True
+        message = "update success"
+    except Exception as err:
+        result = False
+        message = str(err)
+
+    return JsonResponse({"result": result, "message": message})
+
+@login_required
+def like(request):
+    user = request.user.username
+    status_id = request.POST.get("status_id")
+
+    like = Reply.objects.filter(author=user, status=status_id, type="0")
+    if like:
+        like.delete()
+    else:
+        Reply.objects.create(author=user, status=Status.objects.get(id=status_id), type="0")
+    return JsonResponse({"result": True})
