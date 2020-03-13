@@ -7,19 +7,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                <img src="{{ STATIC_URL }}image/{{ user.pic }}" class="img-responsive img-thumbnail">
+                <img src="{{ STATIC_URL }}image/{% if user.pic %}{{ user.pic }}{% else %}1.jpg{% endif %}" id="icon" class="info">
             </div>
             <div class="col-md-10">
-                <h1 style="font-size:70px">{{ user.name }}</h1>
-                <p style="font-size:50px">{{ user.email }}</p>
+                <h1 style="font-size:70px" id="name">{{ user.user }}</h1>
+                <p style="font-size:50px" id="email" class="info">{{ user.email }}</p>
             </div>
         </div>
         <div class="row" style="margin-top:62px">
             <div class="col-md-4">
-                <p style="font-size:50px">{{ user.region}}</p>
+                <p style="font-size:50px">Region</p>
             </div>
             <div class="col-md-8">
-                <p style="font-size:50px;color:gray">Chicago America</p>
+                <p style="font-size:50px;color:gray" id="region" class="info">{{ user.region }}</p>
             </div>
         </div>
         <hr>
@@ -28,7 +28,7 @@
                 <p style="font-size:50px">What's up</p>
             </div>
             <div class="col-md-8">
-                <p style="font-size:50px;color:gray">{{ user.motto }}</p>
+                <p style="font-size:50px;color:gray" id="motto" class="info">{{ user.motto }}</p>
             </div>
         </div>
         <hr>
@@ -37,7 +37,7 @@
                 <p style="font-size:50px">Album</p>
             </div>
             <div class="col-md-8">
-                <img src="{{ STATIC_URL }}/image/messi.jpg" style="width:188px">
+                <img src="{{ STATIC_URL }}image/{{ user.pic }}" style="width:188px">
             </div>
         </div>        
         <hr>

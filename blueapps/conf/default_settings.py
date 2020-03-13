@@ -142,3 +142,5 @@ CELERYD_HIJACK_ROOT_LOGGER = False
 
 # log_dir_prefix
 LOG_DIR_PREFIX = '/app/v3logs/'
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/status'
