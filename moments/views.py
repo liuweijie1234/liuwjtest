@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import time
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from moments.models import WeChatUser, Status, Reply
@@ -82,3 +84,8 @@ def like(request):
     else:
         Reply.objects.create(author=user, status=Status.objects.get(id=status_id), type="0")
     return JsonResponse({"result": True})
+
+
+def into_test(request):
+    time.sleep(20)
+    return JsonResponse({'result': True})
