@@ -16,7 +16,6 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="Python 3.6 (bkee-docs)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="job-class" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="format" value="PLAIN" />
